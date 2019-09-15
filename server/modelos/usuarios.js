@@ -50,6 +50,7 @@ usuarioScherma.plugin(uniqueValidator,{
 });
 
 //Modificamos los metodos
+//En este caso es para que no te devuelva el password
 usuarioScherma.methods.toJSON=function() {
     let user=this;
     let userObject=user.toObject();

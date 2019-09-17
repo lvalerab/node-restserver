@@ -7,7 +7,7 @@ services:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/data/log
     volumes:
-      - /c/Users/neo12/Documents/Dockers/mongodb/data:/data
+      - ./mongodb/data:/data
     ports:
       - 27017:27017
     command: mongod --logpath=/data/log # --quiet  

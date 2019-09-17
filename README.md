@@ -1,10 +1,31 @@
-Uso:
+
+=====================================================================
+Ejecución en node       
+=====================================================================
+
+Antes de ejecutar, se recomienda hacer lo siguiente
+
+npm install -g npm  && npm install
+
+=====================================================================
+Uso con node:
+=====================================================================
 
 npm start
 
 Puerto configurado 3000.
 
-Servicios
+=====================================================================
+Docker: 
+=====================================================================
+
+Para montar la infraestructura en docker, con docker-compose ejecutar:
+
+docker-compose up --build
+
+=====================================================================
+Servicios:
+=====================================================================
 
 GET /lista?desde=<pagina>&cantidad=<Elementos_por_pagina>
     .- Lista los usuarios almacenados en la base de datos

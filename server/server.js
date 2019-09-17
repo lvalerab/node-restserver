@@ -20,7 +20,7 @@ app.listen(process.env.PORT,() => {
 });
 
 timer(10000,function() {
-  let urlMongo='mongodb://root:example@mongodb:27017/cafe';
+  let urlMongo='mongodb://mongodb:27017/cafe';
   console.log(`Intentando conectar a mongodb: ${urlMongo}`);
   mongoose.connect(urlMongo,
   //mongoose.connect('mongodb+srv://node_rest_admin:Qqxt4E0aoVAISjwF@cluster-lfvb-node-rest-z5jlt.mongodb.net/cafe',

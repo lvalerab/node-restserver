@@ -2,8 +2,12 @@ FROM node
 
 WORKDIR /app
 
-COPY . .
+COPY ./server ./server
+COPY ./app.js ./app.js
+COPY ./package.json ./package.json
 
-RUN npm install
 
-RUN npm start
+RUN  npm install -g npm && npm install
+
+ENTRYPOINT  ["node","server/server.js"]
+

@@ -12,21 +12,20 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(bodyParser.json());
 
-app.use(require('./rutas/usuario'));
-
+//Habitilaciond e rutas
+app.use(require('./rutas/index.js'));
 
 app.listen(process.env.PORT,() => {
     console.log(`Escuchando en el puerto 3000`);
 });
 
 timer(10000,function() {
-  let urlMongo='mongodb://mongodb:27017/cafe';
+  let urlMongo=process.env.MONGODB_CAD_CONEX;
   console.log(`Intentando conectar a mongodb: ${urlMongo}`);
   mongoose.connect(urlMongo,
-  //mongoose.connect('mongodb+srv://node_rest_admin:Qqxt4E0aoVAISjwF@cluster-lfvb-node-rest-z5jlt.mongodb.net/cafe',
     {
       useNewUrlParser: true,
-      //useUnifiedTopology: true
+      useUnifiedTopology: true //Para quitar el deprecated al conectar al mongo en heroku
     }, (err,res)=> {
       if(err) {
         console.log(`Error al conectar a la base de datos ${urlMongo}, causa:`);

@@ -6,7 +6,11 @@ const saltRounds=10;
 
 const Usuario=require('../modelos/usuarios'); //Importamos el esquema de usuarios
 
-app.get('/usuario/:id',(req,res) => {
+const  {verificaToken, HasAdminRole, HasUserRole, HasGestRole}=require('../middleware/autentificacion');
+
+app.get('/usuario/:id',
+verificaToken
+, (req,res) => {
     let id=req.params.id;
 
     Usuario.findById(id,(err,usuarioBD)=> {
@@ -26,7 +30,31 @@ app.get('/usuario/:id',(req,res) => {
     });
 });
 
-app.get('/lista',(req,res)=> {
+
+app.get('/usuario',
+verificaToken
+, (req,res) => {
+    let id=req.usuario._id;
+    Usuario.findById(id,(err,usuarioBD)=> {
+        if(err) {
+            res.status(400).json({
+                ok:false,
+                mensaje:err
+            });
+        } else {
+            res.status(200).json(
+                {
+                    ok:true,
+                    usuario:usuarioBD
+                }
+            );
+        }
+    });
+});
+
+app.get('/lista',
+verificaToken
+,(req,res)=> {
     let desde=req.query.desde || 0;
     let cantidad=req.query.cantidad ||0;
     let filtro={
@@ -68,12 +96,12 @@ app.get('/lista',(req,res)=> {
         });
 });
 
-app.post('/usuario',async (req,res) => {
-    let body=req.body;
+app.post('/usuario',[verificaToken,HasAdminRole],async function (req,res) {
+    let body=req.body; 
     let usuario=new Usuario({
         nombre:body.nombre,
         email:body.email,
-        password: bcrypt.hashSync(body.password,saltRounds),
+        password: bcrypt.hashSync(body.password,10),
         role:body.role
     });
     
@@ -94,7 +122,7 @@ app.post('/usuario',async (req,res) => {
     });
 });
 
-app.put('/usuario/:id',(req,res)=> {
+app.put('/usuario/:id',[verificaToken,HasAdminRole],(req,res)=> {
     let id=req.params.id;
     //let body=req.body;
 
@@ -150,7 +178,7 @@ app.put('/usuario/:id',(req,res)=> {
 });*/
 
 
-app.delete('/usuario/:id',(req,res)=> {
+app.delete('/usuario/:id',[verificaToken,HasAdminRole],(req,res)=> {
     let id=req.params.id;
 
     Usuario.findByIdAndUpdate(id,{

@@ -2,7 +2,7 @@
 /// MongoDB
 ///=========================================
 
-process.env.MONGODB_CAD_CONEX=process.env.MONGODB_CAD_CONEX||'mongodb+srv://node_rest_admin:Qqxt4E0aoVAISjwF@cluster-lfvb-node-rest-z5jlt.mongodb.net/cafe';
+process.env.MONGODB_CAD_CONEX=process.env.MONGODB_CAD_CONEX||'mongodb://mongodb:27017/cafe';
 
 ///=========================================
 /// Puerto

@@ -24,6 +24,10 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: servicio_rest_node
+    environment: 
+      - MONGODB_CAD_CONEX=mongodb://mongodb:27017/cafe
+      - TOKEN_CADUCIDAD=3600
+      - TOKEN_SEED=token-generated-by-docker
     ports:
       - 3000:3000
     command: npm start

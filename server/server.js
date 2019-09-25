@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser=require('body-parser');
 const mongoose=require('mongoose');
 const timer =(time,func) => setTimeout(func,time);
-
+const path=require('path'); //PAra rutas relativas
 
 const app=express();
 
@@ -11,6 +11,9 @@ const app=express();
 app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(bodyParser.json());
+
+//Establecemos el contenido statico
+app.use(express.static(path.resolve(__dirname,`../public`)));
 
 //Habitilaciond e rutas
 app.use(require('./rutas/index.js'));
